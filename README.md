@@ -62,6 +62,8 @@ A crude imitation of a video game's official website — an analog horror experi
 Safari 也能跑，但语音合成（speechSynthesis）的可用性和音色因系统而异。
 手机上可以打开，但排版和闪光的观感会打折扣。推荐还是使用电脑。
 
+经过测试手机版打开会无法切换界面...游戏体验折半了啊，因此最好还是使用电脑。
+
 ---
 
 <details>
