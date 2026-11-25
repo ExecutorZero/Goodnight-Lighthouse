@@ -59,8 +59,8 @@ A crude imitation of a video game's official website — an analog horror experi
 
 推荐 **Chrome / Edge / Firefox 最新版**，桌面端体验最佳。
 
-Safari 也能跑，但语音合成（`speechSynthesis`）的可用性和音色因系统而异。
-手机上可以打开，但排版和闪光的观感会打折扣。
+Safari 也能跑，但语音合成（speechSynthesis）的可用性和音色因系统而异。
+手机上可以打开，但排版和闪光的观感会打折扣。推荐还是使用电脑。
 
 ---
 
