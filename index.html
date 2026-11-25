@@ -607,6 +607,33 @@
     to { transform: scale(1.12) rotate(.3deg); }
   }
 
+
+  /* ---------- 右下角控制条 ---------- */
+  .dock {
+    position: fixed; right: 16px; bottom: 16px; z-index: 95;
+    display: flex; gap: 6px; align-items: center; padding: 6px;
+    border-radius: 3px; border: 1px solid var(--line);
+    background: var(--bg);
+    background: color-mix(in srgb, var(--bg) 84%, transparent);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+  }
+  .dock-btn {
+    font-family: inherit; font-size: 11px; letter-spacing: .14em;
+    padding: 9px 14px; border: 1px solid transparent; border-radius: 2px;
+    background: transparent; color: var(--ink); cursor: pointer;
+    text-decoration: none; line-height: 1; white-space: nowrap;
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .dock-btn:hover { border-color: var(--line); background: rgba(255, 255, 255, .07); }
+  #langBtn { border-color: var(--line); font-weight: 600; }
+
+  /* 英文标题更长，单独缩放一档 */
+  html[lang="en"] .hero h1 { font-size: clamp(40px, 7vw, 104px); letter-spacing: .04em; }
+  html[lang="en"] .brand b { font-size: 17px; letter-spacing: .05em; }
+  html[lang="en"] .brand span { display: none; }
+  html[lang="en"] .lede { max-width: 620px; }
+
   .sound-toggle {
     position: fixed; right: 18px; bottom: 18px; z-index: 95;
     background: transparent; border: 1px solid var(--line); color: var(--muted);
@@ -674,7 +701,7 @@
       <a href="#gallery">画面</a>
       <a href="#quotes" id="nav-soundtrack">原声带</a>
       <a href="#devlog" id="nav-devlog">开发日志</a>
-      <a href="#preorder" class="buy">￥68 预购</a>
+      <a href="#preorder" class="buy">￥66 预购</a>
     </nav>
   </header>
 
@@ -1153,7 +1180,10 @@
   <p id="caughtLine">我们会永远与你相伴。</p>
 </div>
 
-<button class="sound-toggle" id="soundToggle">声音：开</button>
+<div class="dock">
+  <button class="dock-btn" id="langBtn" title="Switch language">EN</button>
+  <button class="dock-btn" id="soundToggle" title="Sound">声音：开</button>
+</div>
 
 <script>
 (function () {
@@ -1967,6 +1997,96 @@
     escRule.addEventListener("mouseleave", function () {
       if (!dripped) { clearTimeout(dwellTimer); }
     });
+  }
+
+
+  /* ============ 中英切换 ============ */
+  var I18N = {"晚安灯塔 · 别滚了": "Goodnight Lighthouse · Stop scrolling", "晚安灯塔 · Goodnight Lighthouse": "Goodnight Lighthouse", "晚安灯塔": "Goodnight Lighthouse", "特色": "Features", "画面": "Screens", "原声带": "Soundtrack", "开发日志": "Devlog", "￥66 预购": "Pre-order ￥66", "2026 · 治愈系独立冒险 / Goodnight Lighthouse": "2026 · A cosy indie adventure / Goodnight Lighthouse", "一座海边的灯塔，一位沉默的守塔人，一只总在门口等他的猫。": "A lighthouse by the sea, a silent keeper, and a cat that always waits at his door.", "没有战斗，没有失败，只有潮汐、灯光，和慢慢变长的夜晚。": "No combat, no failure — only tides, lamplight, and nights that keep getting longer.", "立即预购": "Pre-order now", "观看预告": "Watch trailer", "12.4 万": "124,000", "愿望单": "wishlists", "好评率": "positive reviews", "玩家评分": "player rating", "向下滚动": "Scroll down", "为什么值得等待": "Why it's worth the wait", "手绘的每一帧": "Every frame, hand-painted", "超过 4,000 张手绘原画。从晨雾到极夜，每一个季节都有自己的颜色，连海浪的泡沫都是画出来的。": "Over 4,000 hand-painted illustrations. From morning mist to polar night, every season has its own colour — even the sea foam is painted.", "由海浪写成的配乐": "A score written by the waves", "全部环境音实地录制：海浪、风声、旧木头的呼吸。建议戴耳机，把音量调到你平时觉得舒服的位置。": "Every ambient sound was recorded on location: waves, wind, the breathing of old wood. Headphones recommended — set the volume where it feels comfortable.", "没有失败，只有等待": "No failure, only waiting", "你只需要点亮灯，然后等待。等船，等人，等一个不会到来的早晨。": "Light the lamp, and wait. For a ship, for a person, for a morning that never comes.", "一只会等你回家的猫": "A cat that waits for you to come home", "它没有名字。你可以叫它任何名字，它都会来。": "It has no name. Call it anything — it will come.", "灯塔的清晨": "Morning at the lighthouse", "第七个冬天": "The seventh winter", "第三百二十七天": "Day three hundred and twenty-seven", "归航": "Homeward", "他们说": "What they said", "「玩到结尾，我在屏幕前坐了很久。」": "“I sat in front of the screen for a long time after the ending.”", "—— 独立游戏观察": "— Indie Game Watch", "「今年最安静、也最舍不得通关的两个小时。」": "“The quietest two hours of my year — and the hardest to finish.”", "—— 玩家 阿岚": "— Lan, player", "「建议在深夜，一个人，戴耳机。」": "“Best played late at night, alone, with headphones.”", "—— 主播 老周": "— Zhou, streamer", "「我们从来没有邀请过这位玩家。」": "“We never invited this player.”", "—— 灯塔工作室": "— Lighthouse Studio", "—— 它也这么说": "— It says so too", "现在就把它留在身边": "Keep it close", "首发特惠 −25%": "Launch offer −25%", "限时至 11.30": "Until 11.30", "一次买断 · 无内购": "One-time purchase · no microtransactions", "首发剩余": "Offer ends in", "66 —— 我们工作室特别喜欢这个数字！": "66 — our studio really likes this number!", "完整游戏": "Full game", "原声带 18 首": "18-track soundtrack", "数字画集": "Digital artbook", "首发特典": "Launch bonus", "加入愿望单": "Add to wishlist", "已有": "Wishlisted by", "人把它加入了愿望单": "people", "首发已结束": "Launch offer ended", "你迟到了。": "You're late.", "现在，没有人还在等待了。": "Now, no one is waiting anymore.", "66 —— 这个数字，我们也是后来才知道的。": "66 — we only learned what that number means later.", "把它留在这里吧": "Leave it here", "常见问题": "FAQ", "游戏时长多久？": "How long is the game?", "约 3 小时。如果你愿意在灯塔里多待一会儿，会更长。": "About 3 hours. Longer, if you're willing to stay in the lighthouse a while.", "支持哪些平台？": "Which platforms?", "Windows 与 macOS，稍后会有主机版本。": "Windows and macOS. Console versions later.", "有中文配音吗？": "Is there voice acting?", "有，全程配音。守塔人由一位退休的话剧演员配音。": "Yes, fully voiced. The keeper is played by a retired stage actor.", "我可以离开吗？": "Can I leave?", "可以。页面会记住你回头的次数。": "Yes. The page remembers how many times you look back.", "灯塔里还有别人吗？": "Is there anyone else in the lighthouse?", "我们不知道该怎么回答这个问题。": "We don't know how to answer that.", "访客须知": "House Rules", "灯塔每天十八点整亮灯，次日六点熄灯。熄灯后请勿逗留。": "The lamp is lit at 18:00 and put out at 06:00. Do not linger after dark.", "请勿与守塔人交谈。如需交流，请写在访客簿上。": "Do not speak to the keeper. If you must communicate, write it in the visitor's book.", "二楼走廊尽头没有房间。如果你看见了，请不要进去。": "There is no room at the end of the second-floor corridor. If you see one, do not enter.", "本灯塔只有一位守塔人。如果你看到两位，请向第二位问好，然后立刻离开。": "There is only one keeper. If you meet two, greet the second one, then leave at once.", "猫可以摸，但请不要问它叫什么名字。": "You may pet the cat. Do not ask its name.", "上楼的台阶一共四十七级。如果你数出四十八级，请原路返回，不要回头再数一遍。": "The stairs have forty-seven steps. If you count forty-eight, turn back — and do not count again.", "如果页面自己向下滚动，说明你已经违反过以上任意一条。": "If the page scrolls by itself, you have already broken one of the rules above.", "如遇不属于已知游戏内容的情况，请按": "If you encounter something that is not part of the known game, press", "退出游戏。退出是允许的。": "to exit the game. Leaving is permitted.", "以上须知，请务必遵守。": "Please observe all of the above.", "第 7 条正在生效。": "Rule 7 is now in effect.", "请享受我们的游戏": "Enjoy our game", "开发日志 · 关于这座灯塔": "Devlog · About this lighthouse", "我们花了三年时间，复刻了一座真实存在的灯塔。它位于北纬 47°12′，1911 年建成，白色石塔，八角形灯室。": "We spent three years recreating a lighthouse that really exists. 47°12′ N, built in 1911: a white stone tower with an octagonal lantern room.", "它最后一次出现在航海记录里，是 2008 年的冬天。那之后，没有人再登记过它的灯光。": "It last appeared in a nautical record in the winter of 2008. After that, no one logged its light again.", "最后登记：2008.12.23": "Last entry: 2008.12.23", "我们去过那里。门是从里面锁上的。": "We went there. The door was locked from the inside.", "游戏里的每一个细节，都来自那栋房子。包括那只猫。": "Every detail in the game comes from that house. Including the cat.", "玩家留言": "Player messages", "匿": "A", "岚": "L", "「我玩到第三天，发现猫的名字和我小时候那只一样。」": "“On the third day I noticed the cat's name was the same as mine, when I was little.”", "「关掉游戏以后，客厅的灯是自己亮的。」": "“After I closed the game, the living room light turned itself on.”", "「不要玩到第 1,826 天。」": "“Don't play past day 1,826.”", "「别往下滚了。」": "“Stop scrolling.”", "「别往下走了。」": "“Don't go any further.”", "「别往上走了。」": "“Don't go back up.”", "「来不及了。」": "“It's too late.”", "「它一直在数。」": "“It has been counting the whole time.”", "「你已经看了很久了。」": "“You have been looking for a long time.”", "「灯不是给你点的。」": "“The lamp was not lit for you.”", "匿名 · 2026.10.02": "Anonymous · 2026.10.02", "匿名 · 2026.10.19": "Anonymous · 2026.10.19", "匿名 · 2026.11.01": "Anonymous · 2026.11.01", "灯灭了。": "The lamp has gone out.", "—— 但我还在这里。": "— But I am still here.", "你已经往下滚了": "You've come this far", "你还在往下滚": "You're still scrolling", "你在找什么": "What are you looking for", "别回头": "Don't look back", "你已经滚动了": "You have scrolled", "像素": "px", "© 2026 灯塔工作室 · 保留所有权利": "© 2026 Lighthouse Studio. All rights reserved.", "隐私政策 · 服务条款 ·": "Privacy · Terms ·", "联系我们": "Contact", "（参见 · 访客须知 第 8 条）": "(See · House Rules, Rule 8)", "灯还亮着。": "The lamp is still on.", "但已经没有人需要它了。": "But no one needs it anymore.", "你听见了吗。": "Do you hear that.", "—— 有人在你身后呼吸。": "— Someone is breathing behind you.", "你退出了游戏 · 向上滚动": "You left the game · scroll up", "向上滚动，回到你来的地方": "Scroll up, back to where you came from", "把它加入愿望单？": "Add it to your wishlist?", "你的名字会出现在名单上。": "Your name will appear on the list.", "是": "Yes", "否": "No", "我们会永远与你相伴。": "We will always be with you.", "我们会永远与你相伴": "We will always be with you", "声音：开": "Sound: On", "声音：关": "Sound: Off", "它还在听": "It's still listening", "它在看": "It's watching", "维护中": "Under maintenance", "已删除": "Deleted", "已停更": "Discontinued", "……还在吗": "...are you still there", "已加入 ✓": "Added ✓", "已加入": "Added", "它不喜欢这个答案。": "It doesn't like that answer.", "请重新选择。": "Choose again.", "晚　安": "GOOD NIGHT", "晚安": "Goodnight", "请勿关闭页面": "Do not close this page", "你确定要加入吗？": "Are you sure you want to join?", "她": "her", "它": "it", "守塔人": "the keeper", "你": "you"};
+  var I18N_REV = {};
+  Object.keys(I18N).forEach(function (k) { I18N_REV[I18N[k]] = k; });
+
+  var lang = "zh";
+  var applyingLang = false;
+
+  function tr(s, toEn) {
+    var m = /^(\s*)([\s\S]*?)(\s*)$/.exec(s);
+    var core = m[2];
+    if (!core) { return s; }
+    var hit = toEn ? I18N[core] : I18N_REV[core];
+    return hit ? m[1] + hit + m[3] : s;
+  }
+
+  function applyLang(to) {
+    lang = to;
+    applyingLang = true;
+    if (langObserver) { langObserver.disconnect(); }
+
+    var toEn = (to === "en");
+
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      var p = node.parentNode;
+      if (!p) { continue; }
+      var tag = p.tagName;
+      if (tag === "SCRIPT" || tag === "STYLE") { continue; }
+      var nv = tr(node.nodeValue, toEn);
+      if (nv !== node.nodeValue) { node.nodeValue = nv; }
+    }
+
+    var attrs = ["title", "aria-label", "alt", "data-text"];
+    attrs.forEach(function (a) {
+      var els = document.querySelectorAll("[" + a + "]");
+      for (var i = 0; i < els.length; i++) {
+        var v = els[i].getAttribute(a);
+        var nv = tr(v, toEn);
+        if (nv !== v) { els[i].setAttribute(a, nv); }
+      }
+    });
+
+    var nt = tr(document.title, toEn);
+    if (nt !== document.title) { document.title = nt; }
+
+    document.documentElement.lang = toEn ? "en" : "zh-CN";
+    applyingLang = false;
+
+    if (langObserver) {
+      langObserver.observe(document.documentElement, { subtree: true, childList: true, characterData: true });
+    }
+  }
+
+  var langBtn = document.getElementById("langBtn");
+
+  function updateLangBtn() {
+    if (!langBtn) { return; }
+    langBtn.textContent = (lang === "zh") ? "EN" : "中文";
+    langBtn.title = (lang === "zh") ? "Switch to English" : "切换为中文";
+  }
+
+  if (langBtn) {
+    langBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      applyLang(lang === "zh" ? "en" : "zh");
+      updateLangBtn();
+    });
+  }
+
+  // JS 之后写入的中文，也在英文模式下自动翻译
+  var langPending = false;
+  var langObserver = new MutationObserver(function () {
+    if (applyingLang || lang !== "en" || langPending) { return; }
+    langPending = true;
+    requestAnimationFrame(function () {
+      langPending = false;
+      if (lang === "en" && !applyingLang) { applyLang("en"); }
+    });
+  });
+  langObserver.observe(document.documentElement, { subtree: true, childList: true, characterData: true });
+
+  // 支持 ?lang=en 直接进英文
+  if (/[?&]lang=en\b/.test(location.search)) {
+    applyLang("en");
+    updateLangBtn();
   }
 
   /* ============ 初始化 ============ */
