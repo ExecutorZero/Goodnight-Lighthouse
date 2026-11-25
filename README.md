@@ -13,6 +13,11 @@ A crude imitation of a video game's official website — an analog horror experi
 - **==注意：本网页使用了AI辅助创作，如在意请退出，本作品仅仅是因为作者的梦境与脑洞发散而创造，本人代码水平不怎么高==**
 - ***==A note on how this was made: AI tools were used in the making of this page. If that's not your thing, no hard feelings — you're welcome to close the tab. This whole thing exists because of a dream and an imagination that got out of hand. Also, my coding skills are, frankly, not great.==***
 ### 感谢喜欢！**Thanks for playing — and for liking it!**
+
+**更新了英文版，现在右下角可以在中文 / English之间切换，也可以随时关掉声音。**
+
+**Added an English version: switch languages and toggle sound from the bottom-right corner.**
+
 ---
 
 ## **声明**
